@@ -1,6 +1,7 @@
-# DSS Best STIKI Practice Class Assistant
+# DSS Best STIKI Practicum Class Assistant
 
-Web-based program to implements decision support system to choosing the best practice class assistant in STIKI using TOPSIS method. Made by STIKI Malang students.
+Web-based decision support system program to determine the best STIKI practicum assistant using the TOPSIS method.
+Made by STIKI Malang students for final task of Decision Support System course in STIKI Malang.
 
 List of Author :
 - Yohanes Dwi Listio (151-111-011)
