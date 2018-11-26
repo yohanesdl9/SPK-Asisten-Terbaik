@@ -1,54 +1,65 @@
-<div id="MInsertJAst" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-    <div class="modal-dialog">
-        <div class="modal-content">
-            <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-                <h4 class="modal-title" id="myModalLabel">Masukkan Jadwal Asisten</h4>
-            </div>
-            <form action="<?php echo base_url() ?>jadwal_asisten/insert" class="form_horizontal" enctype="multipart/form-data" method="POST">
-            <div class="modal-body">
-                <div class="form-group row">
-                    <label for="mk_kelas" class="col-md-4 control-label">Matakuliah dan Kelas*</label>
-                    <div class="col-md-8">
-                        <select name="mk_kelas" class="form-control select2 matkul" id="matkul" style="width: 100%">
-                            <option disabled selected>Pilih Matakuliah</option>
-                            <?php foreach($matkul as $mk):?>
-                            <option value="<?php echo $mk->kode_kelas . "-" . $mk->tipe ?>"><?php echo $mk->kodemk . " - " . $mk->namamk . " " . $mk->kelas?></option>
-                            <?php endforeach; ?>
-                        </select>
-                    </div>
-                </div>
-                <div class="form-group row">
-                    <label for="asisten" class="col-md-4 control-label">Asisten 1*</label>
-                    <div class="col-md-6">
-                        <select name="asisten1" class="form-control select2 asisten" id="asisten1" style="width: 100%">
-                            <option disabled selected>Pilih Asisten</option>
-                            <?php foreach($asisten as $ast):?>
-                            <option value="<?php echo $ast->nrp . "-" . $ast->nama?>"><?php echo $ast->nama?></option>
-                            <?php endforeach; ?>
-                        </select>
-                    </div>
-                </div>
-                <div class="form-group row">
-                    <label for="asisten" class="col-md-4 control-label">Asisten 2*</label>
-                    <div class="col-md-6">
-                        <select name="asisten2" class="form-control select2 asisten" id="asisten2" style="width: 100%">
-                            <option disabled selected>Pilih Asisten</option>
-                            <?php foreach($asisten as $ast):?>
-                            <option value="<?php echo $ast->nrp . "-" . $ast->nama?>"><?php echo $ast->nama?></option>
-                            <?php endforeach; ?>
-                        </select>
-                    </div>
-                </div>	
-                <p style="color: red"> *Required field must be filled </p>
-            </div>
-            <div class="modal-footer">
-                <button class="btn btn-success" type="submit"> Confirm </button>
-                <button type="reset" class="btn btn-danger" data-dismiss="modal" aria-hidden="true"> Cancel </button>
-            </div>
-            </form>
-        </div>
-    </div>
+<?php
+$this->load->view('templates/header', compact('subtitle'));
+if ($matkul->num_rows() < 1){ ?>
+	<div class="alert alert-danger alert-dismissible">
+		<button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+		<h4>Kesalahan</h4>
+		Semua Jadwal Kuliah telah terisi Asisten.
+	</div>
+	<a href="<?php echo base_url()?>jadwal_asisten" class="btn btn-default">Kembali</a>
+<?php } else {
+if ($this->session->flashdata('error_message')){ ?> 
+	<div class="alert alert-danger alert-dismissible">
+		<button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+		<?php echo $this->session->flashdata('error_message') ?>
+	</div>
+<?php
+} ?>
+<div class="box">
+	<div class="box-header with-border">
+		<h3 class="box-title">Masukkan Jadwal Asisten</h3>
+	</div>
+	<form class="form-horizontal" action="<?php echo base_url()?>jadwal_asisten/insert" method="post">
+		<div class="box-body">
+			<div class="form-group">
+				<label for="mk_kelas" class="col-md-3 control-label">Matakuliah dan Kelas</label>
+				<div class="col-md-5">
+					<select name="mk_kelas" class="form-control select2 matkul" id="matkul">
+						<option disabled selected>Pilih Matakuliah</option>
+						<?php foreach($matkul->result() as $mk):?>
+						<option value="<?php echo $mk->no_jadwal . "/" . $mk->tipe ?>"><?php echo $mk->kodemk . " - " . $mk->namamk . " " . $mk->kelas?></option>
+						<?php endforeach; ?>
+					</select>
+				</div>
+			</div>
+			<div class="form-group">
+				<label for="asisten" class="col-md-3 control-label">Asisten 1</label>
+				<div class="col-md-3">
+					<select name="asisten1" class="form-control select2 asisten" id="asisten1">
+						<option disabled selected>Pilih Asisten</option>
+						<?php foreach($asisten as $ast):?>
+						<option value="<?php echo $ast->nrp . "-" . $ast->nama?>"><?php echo $ast->nama?></option>
+						<?php endforeach; ?>
+					</select>
+				</div>
+			</div>
+			<div class="form-group">
+				<label for="asisten" class="col-md-3 control-label">Asisten 2</label>
+				<div class="col-md-3">
+					<select name="asisten2" class="form-control select2 asisten" id="asisten2">
+						<option disabled selected>Pilih Asisten</option>
+						<?php foreach($asisten as $ast):?>
+						<option value="<?php echo $ast->nrp . "-" . $ast->nama?>"><?php echo $ast->nama?></option>
+						<?php endforeach; ?>
+					</select>
+				</div>
+			</div>	
+		</div>
+		<div class="box-footer">
+			<a href="<?php echo base_url()?>jadwal_asisten" class="btn btn-default">Kembali</a>
+			<input type="submit" class="btn btn-info pull-right" value="Simpan" />
+		</div>
+	</form>
 </div>
 <script>
 	$(document).ready(function(){
@@ -79,3 +90,6 @@
 		};
 	});
 </script>
+<?php }
+$this->load->view('templates/footer');
+?>

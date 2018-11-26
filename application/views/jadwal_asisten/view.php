@@ -13,7 +13,7 @@ if ($this->session->flashdata('success_message')){ ?>
 	<div class="box-header with-border">
 		<div class="row">
 			<div class="col-md-2">
-				<a href="#" class="btn btn-block btn-success" data-target="#MInsertJAst" data-toggle="modal"><i class="fa fa-fw fa-plus"></i>Tambah</a>
+				<a href="<?php echo base_url() ?>jadwal_asisten/form_insert" class="btn btn-block btn-success"><i class="fa fa-fw fa-plus"></i>Tambah</a>
 			</div>
 		</div>
 	</div>
@@ -50,7 +50,7 @@ if ($this->session->flashdata('success_message')){ ?>
 		</table>
 	</div>
 </div>
-<?php $this->load->view('jadwal_asisten/form_insert');
+<?php
 $this->load->view('templates/footer');
 
 function get_nama_hari($index){
