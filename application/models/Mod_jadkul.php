@@ -59,7 +59,7 @@ class Mod_jadkul extends CI_Model{
         $tahun = date('Y');
         $tahun_ajaran = $bulan <= 7 ? ($tahun - 1) . "/" . $tahun : $tahun . "/" . ($tahun + 1);
         $semester = ($bulan >= 2 && $bulan <= 7) ? 'Genap' : 'Ganjil';
-        $query = "SELECT * FROM view_jadwal_kuliah WHERE kode_kelas <> $kode_kelas AND koderuang = '$ruang' AND hari = $hari 
+        $query = "SELECT * FROM view_jadwal_kuliah WHERE kode_kelas <> '$kode_kelas' AND koderuang = '$ruang' AND hari = $hari 
         AND (((jam_mulai < '$jam_mulai' AND jam_selesai > '$jam_mulai') OR (jam_mulai < '$jam_selesai' AND jam_selesai > '$jam_selesai')) 
         OR (jam_mulai = '$jam_mulai' AND jam_selesai = '$jam_selesai')) AND tahun_ajaran = '$tahun_ajaran' AND semester = '$semester'";
         return $this->db->query($query)->num_rows();

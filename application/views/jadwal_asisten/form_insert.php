@@ -27,7 +27,7 @@ if ($this->session->flashdata('error_message')){ ?>
 					<select name="mk_kelas" class="form-control select2 matkul" id="matkul">
 						<option disabled selected>Pilih Matakuliah</option>
 						<?php foreach($matkul->result() as $mk):?>
-						<option value="<?php echo $mk->no_jadwal . "/" . $mk->tipe ?>"><?php echo $mk->kodemk . " - " . $mk->namamk . " " . $mk->kelas?></option>
+						<option value="<?php echo $mk->kode_kelas . "/" . $mk->tipe ?>"><?php echo $mk->kodemk . " - " . $mk->namamk . " " . $mk->kelas?></option>
 						<?php endforeach; ?>
 					</select>
 				</div>
@@ -70,7 +70,7 @@ if ($this->session->flashdata('error_message')){ ?>
 		asisten2.disabled = true;
 		matkul.onchange = function(){
 			asisten1.disabled = matkul.value.includes("Pilih Matakuliah");
-			asisten2.disabled = matkul.value.split("-")[1] == 1;
+			asisten2.disabled = matkul.value.split("/")[1] == 1;
 			var $selects = $(".asisten");
 			var $opts = $selects.first().children().clone();
 			$selects.change(function(){

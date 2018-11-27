@@ -11,13 +11,13 @@ if ($this->session->flashdata('error_message')){ ?>
 	<div class="box-header with-border">
 		<h3 class="box-title">Edit Jadwal Asisten</h3>
 	</div>
-	<form class="form-horizontal" action="<?php echo base_url()?>jadwal_asisten/edit" method="post">
+	<form class="form-horizontal" action="<?php echo base_url()?>jadwal_asisten/update" method="post">
 		<div class="box-body">
 			<div class="form-group">
 				<label for="mk_kelas" class="col-md-3 control-label">Matakuliah dan Kelas</label>
 				<div class="col-md-6">
 					<label for="mk_kelas" class="control-label"><?php echo $mk->kodemk . " - " . $mk->namamk . "-" . $mk->kelas; ?></label>
-					<input type="hidden" name="mk_kelas" class="form-control" value="<?php echo $mk->kode_kelas . "-" . $mk->tipe; ?>" id="matkul" />
+					<input type="hidden" name="mk_kelas" class="form-control" value="<?php echo $mk->kode_kelas . "/" . $mk->tipe; ?>" id="matkul" />
 				</div>
 			</div>
 			<div class="form-group">
@@ -55,7 +55,7 @@ if ($this->session->flashdata('error_message')){ ?>
 		var matkul = document.getElementById("matkul");
 		var asisten1 = document.getElementById("asisten");
 		var asisten2 = document.getElementById("asisten2");
-		asisten2.disabled = matkul.value.split("-")[1] == 1;
+		asisten2.disabled = matkul.value.split("/")[1] == 1;
 		var $selects = $(".asisten");
 		var $opts = $selects.first().children().clone();
 		var selectedValues = $selects.map(function(){
