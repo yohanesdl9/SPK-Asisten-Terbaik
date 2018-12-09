@@ -36,7 +36,7 @@ if ($this->session->flashdata('success_message')){ ?>
 				<tr>
 					<td><?php echo $jd->kodemk . " - " . $jd->namamk; ?></td>
 					<td class="text-center"><?php echo $jd->kelas; ?></td>
-					<td><?php echo get_nama_hari($jd->hari) . ' ' . $jd->jam_mulai . " - " . $jd->jam_selesai . ' ' . $jd->koderuang; ?></td>
+					<td><?php echo get_nama_hari($jd->hari) . ' ' . $jd->jam_mulai . "-" . $jd->jam_selesai . ' ' . $jd->koderuang; ?></td>
                     <td class="text-center"><?php echo $jd->avg_kelas; ?></td>
                     <td class="text-center"><?php echo $jd->jumlah_A; ?></td>
                     <td class="text-center"><?php echo $jd->jumlah_B_plus; ?></td>

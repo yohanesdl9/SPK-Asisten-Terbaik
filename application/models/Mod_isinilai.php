@@ -9,7 +9,7 @@ class Mod_isinilai extends CI_Model{
     }
 
     public function fetch($kode_kelas){
-        return $this->db->where('kode_kelas', $kode_kelas)->get('view_detail_nilai');
+        return $this->db->where('kode_kelas', $kode_kelas)->get('detail_nilai');
     }
 
     public function fetchMatkul($kode_kelas){

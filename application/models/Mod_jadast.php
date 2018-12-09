@@ -20,6 +20,10 @@ class Mod_jadast extends CI_Model{
         return $this->db->where('kode_kelas', $kode_kelas)->get('jadwal_asisten');
     }
 
+    public function fetchJadwal($kode_kelas){
+        return $this->db->where('kode_kelas', $kode_kelas)->get('view_jadwal_asisten');
+    }
+
     public function insert($kode_kelas, $asisten_1, $asisten_2 = ''){
         if ($asisten_2 == ''){
             $data = array(

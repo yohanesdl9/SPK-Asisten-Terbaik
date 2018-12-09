@@ -6,6 +6,8 @@ class Isi_nilai extends CI_Controller {
         parent::__construct();
         $this->load->library('template');
         $this->load->model('mod_isinilai');
+        $this->load->model('mod_jadkul');
+        $this->load->model('mod_jadast');
     }
 
     public function index(){
@@ -22,6 +24,13 @@ class Isi_nilai extends CI_Controller {
         }
     }
 
+    public function form_insert($kode_kelas){
+        $data_nilai = $this->mod_isinilai->fetch($kode_kelas);
+        $hasil = $this->mod_jadkul->fetchMatkul($kode_kelas)->row();
+        $asisten = $this->mod_jadast->fetchJadwal($kode_kelas)->row();
+        $this->load->view('isi_nilai/form', compact('data_nilai', 'hasil', 'asisten'));
+    }
+
     public function insert(){
 
         redirect('jadwal_kuliah');
@@ -35,14 +44,6 @@ class Isi_nilai extends CI_Controller {
 
         $this->session->set_flashdata('success_message', 'Data berhasil diubah');
         redirect('jadwal_kuliah');
-    }
-
-    public function confirm_delete(){
-
-    }
-
-    public function delete($id){
-
     }
 }
 
