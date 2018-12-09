@@ -14,9 +14,9 @@ class Isi_nilai extends CI_Controller {
             $tahun = date('Y');
             $tahun_ajaran = $bulan <= 7 ? ($tahun - 1) . "/" . $tahun : $tahun . "/" . ($tahun + 1);
             $semester = ($bulan >= 2 && $bulan <= 7) ? 'Genap' : 'Ganjil';
-            $data['matkul'] = $this->mod_matkul->fetchAll();
+            $data['jadwal'] = $this->mod_isinilai->fetchAll();
             $data['subtitle'] = "Semester " . $semester . " " . $tahun_ajaran;
-            $this->load->view('jadwal_kuliah/view', $data);
+            $this->load->view('isi_nilai/view', $data);
         } else {
             redirect('login');
         }
