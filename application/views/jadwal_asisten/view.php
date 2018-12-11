@@ -21,24 +21,20 @@ if ($this->session->flashdata('success_message')){ ?>
 		<table class="table table-bordered table-striped mytable">
             <thead>
 				<tr>
-					<th>KodeMK - Nama Matakuliah</th>
-					<th>Kelas</th>
-					<th>Ruang</th>
-					<th>Hari</th>
-					<th style="width: 150px">Jam</th>
-					<th>Asisten 1</th>
-					<th>Asisten 2</th>
-					<th>Opsi</th>
+					<th class="text-center">KodeMK - Nama Matakuliah</th>
+					<th class="text-center">Kelas</th>
+					<th class="text-center">Pertemuan</th>
+					<th class="text-center">Asisten 1</th>
+					<th class="text-center">Asisten 2</th>
+					<th class="text-center">Opsi</th>
 				</tr>
 			</thead>
 			<tbody>
 				<?php foreach($jadwal as $jd){?>
 				<tr>
 					<td><?php echo $jd->kodemk . " - " . $jd->namamk?></td>
-					<td><?php echo $jd->kelas?></td>
-					<td><?php echo $jd->koderuang?></td>
-					<td><?php echo get_nama_hari($jd->hari)?></td>
-					<td><?php echo $jd->jam_mulai . " - " . $jd->jam_selesai?></td>
+					<td class="text-center"><?php echo $jd->kelas?></td>
+					<td><?php echo get_nama_hari($jd->hari) . ' ' . $jd->jam_mulai . " - " . $jd->jam_selesai . ' ' . $jd->koderuang?></td>
 					<td><?php echo $jd->asisten_1?></td>
 					<td><?php echo $jd->asisten_2?></td>
 					<td class="btn-group">

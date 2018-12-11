@@ -21,24 +21,20 @@ if ($this->session->flashdata('success_message')){ ?>
 		<table class="table table-bordered table-striped mytable">
             <thead>
 				<tr>
-					<th>Kode MK - Nama Matakuliah</th>
-					<th>Kelas</th>
-					<th>Dosen</th>
-					<th>Ruang</th>
-					<th>Hari</th>
-					<th>Jam</th>
-					<th>Opsi</th>
+					<th class="text-center">Kode MK - Nama Matakuliah</th>
+					<th class="text-center">Kelas</th>
+					<th class="text-center">Dosen</th>
+					<th class="text-center">Pertemuan</th>
+					<th class="text-center">Opsi</th>
 				</tr>
 			</thead>
 			<tbody>
 				<?php foreach($jadwal as $jd){?>
 				<tr>
 					<td><?php echo $jd->kodemk . " - " . $jd->namamk?></td>
-					<td><?php echo $jd->kelas?></td>
+					<td class="text-center"><?php echo $jd->kelas?></td>
 					<td><?php echo $jd->nama_dosen?></td>
-					<td><?php echo $jd->koderuang?></td>
-					<td><?php echo get_nama_hari($jd->hari)?></td>
-					<td><?php echo $jd->jam_mulai . " - " . $jd->jam_selesai?></td>
+					<td><?php echo get_nama_hari($jd->hari) . ' ' . $jd->jam_mulai . " - " . $jd->jam_selesai . ' ' . $jd->koderuang?></td>
 					<td class="btn-group">
 						<a href="<?php echo base_url() ?>jadwal_kuliah/form_edit/<?php echo $jd->kode_kelas;?>" class="btn btn-xs btn-info">Ubah</a>
 						<a href="#" class="delete_modal btn btn-xs btn-danger" data-id="<?php echo $jd->kode_kelas; ?>" onclick="confirm_modal('<?php echo $jd->kode_kelas; ?>')">Hapus</a>
