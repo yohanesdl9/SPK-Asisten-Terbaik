@@ -44,12 +44,17 @@ if ($this->session->flashdata('error_message')){ ?>
             </div>
         </div>
 	</div>
-	<form class="form-horizontal" action="<?php echo base_url()?>isi_nilai/isi" method="post">
+    <?php 
+        $action = $status == 1 ? 'update' : 'insert';
+    ?>
+	<form class="form-horizontal" action="<?php echo base_url()?>isi_nilai/<?php echo $action; ?>" method="post">
 		<div class="box-body">
+            <input type="hidden" name="kode_kelas" value="<?php echo $hasil->kode_kelas; ?>">
+            <input type="hidden" name="jumlah_peserta" value="<?php echo $hasil->jumlah_peserta; ?>">
             <div class="form-group">
 				<label for="avg_kelas" class="col-md-2 control-label">Rata-Rata Kelas</label>
 				<div class="col-md-1">
-					<input type="text" class="form-control" name="avg_kelas" />
+					<input type="text" class="form-control" name="avg_kelas" value="<?php echo @$data_nilai->avg_kelas; ?>" />
 				</div>
 			</div>
             <div class="form-group">
@@ -59,15 +64,15 @@ if ($this->session->flashdata('error_message')){ ?>
                         <tr>
                             <td style="width: 5%;" class="text-center">A</td>
                             <td style="width: 10%;">
-                                <input type="text" class="form-control" name="jumlah_A" />
+                                <input type="text" class="form-control" name="jumlah_A" value="<?php echo @$data_nilai->jumlah_A; ?>" />
                             </td>
                             <td style="width: 5%;" class="text-center">B+</td>
                             <td style="width: 10%;">
-                                <input type="text" class="form-control" name="jumlah_B_plus" />
+                                <input type="text" class="form-control" name="jumlah_B_plus" value="<?php echo @$data_nilai->jumlah_B_plus; ?>" />
                             </td>
                             <td style="width: 5%;" class="text-center">B</td>
                             <td style="width: 10%;">
-                                <input type="text" class="form-control" name="jumlah_B" />
+                                <input type="text" class="form-control" name="jumlah_B" value="<?php echo @$data_nilai->jumlah_B; ?>" />
                             </td>
                             <td style="width: 5%;"></td>
                             <td style="width: 10%;"></td>
@@ -75,19 +80,19 @@ if ($this->session->flashdata('error_message')){ ?>
                         <tr>
                             <td class="text-center">C+</td>
                             <td>
-                                <input type="text" class="form-control" name="jumlah_C_plus" />
+                                <input type="text" class="form-control" name="jumlah_C_plus" value="<?php echo @$data_nilai->jumlah_C_plus; ?>" />
                             </td>
                             <td class="text-center">C</td>
                             <td>
-                                <input type="text" class="form-control" name="jumlah_C" />
+                                <input type="text" class="form-control" name="jumlah_C" value="<?php echo @$data_nilai->jumlah_C; ?>" />
                             </td>
                             <td class="text-center">D</td>
                             <td>
-                                <input type="text" class="form-control" name="jumlah_D" />
+                                <input type="text" class="form-control" name="jumlah_D" value="<?php echo @$data_nilai->jumlah_D; ?>" />
                             </td>
                             <td class="text-center">E</td>
                             <td>
-                                <input type="text" class="form-control" name="jumlah_E" />
+                                <input type="text" class="form-control" name="jumlah_E" value="<?php echo @$data_nilai->jumlah_E; ?>" />
                             </td>
                         </tr>
                     </table>

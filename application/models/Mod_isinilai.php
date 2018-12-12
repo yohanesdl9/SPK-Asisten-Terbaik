@@ -12,42 +12,33 @@ class Mod_isinilai extends CI_Model{
         return $this->db->where('kode_kelas', $kode_kelas)->get('detail_nilai');
     }
 
-    public function fetchMatkul($kode_kelas){
-        return $this->db->where('kode_kelas', $kode_kelas)->get('view_jadwal_kuliah');
+    public function insert($kode_kelas, $avg_kelas, $jumlah_A, $jumlah_B_plus, $jumlah_B, $jumlah_C_plus, $jumlah_C, $jumlah_D, $jumlah_E){
+        $data = array(
+            'kode_kelas' => $kode_kelas,
+            'avg_kelas' => $avg_kelas,
+            'jumlah_A' => $jumlah_A,
+            'jumlah_B_plus' => $jumlah_B_plus,
+            'jumlah_B' => $jumlah_B,
+            'jumlah_C_plus' => $jumlah_C_plus,
+            'jumlah_C' => $jumlah_C,
+            'jumlah_D' => $jumlah_D,
+            'jumlah_E' => $jumlah_E
+        );
+        $this->db->insert('detail_nilai', $data);
     }
 
-    public function insert($kodemk, $kelas, $hari, $nip, $jam_mulai, $jam_selesai, $kode_ruang, $tahun_ajaran, $jumlah_peserta){
-        $tahun = explode('/', $tahun_ajaran);
+    public function update($kode_kelas, $avg_kelas, $jumlah_A, $jumlah_B_plus, $jumlah_B, $jumlah_C_plus, $jumlah_C, $jumlah_D, $jumlah_E){
         $data = array(
-            'kode_kelas' => $kodemk . '-' . $kelas . '-' . $tahun[0],
-            'kodemk' => $kodemk,
-            'kelas' => $kelas,
-            'hari' => $hari,
-            'nip' => $nip,
-            'jam_mulai' => $jam_mulai,
-            'jam_selesai' => $jam_selesai,
-            'koderuang' => $kode_ruang,
-            'tahun_ajaran' => $tahun_ajaran,
-            'jumlah_peserta' => $jumlah_peserta 
+            'avg_kelas' => $avg_kelas,
+            'jumlah_A' => $jumlah_A,
+            'jumlah_B_plus' => $jumlah_B_plus,
+            'jumlah_B' => $jumlah_B,
+            'jumlah_C_plus' => $jumlah_C_plus,
+            'jumlah_C' => $jumlah_C,
+            'jumlah_D' => $jumlah_D,
+            'jumlah_E' => $jumlah_E
         );
-        $this->db->insert('jadwal_kuliah', $data);
-    }
-
-    public function update($old_kodekelas, $kodemk, $kelas, $hari, $nip, $jam_mulai, $jam_selesai, $kode_ruang, $tahun_ajaran, $jumlah_peserta){
-        $tahun = explode('/', $tahun_ajaran);
-        $data = array(
-            'kode_kelas' => $kodemk . '-' . $kelas . '-' . $tahun[0],
-            'kodemk' => $kodemk,
-            'kelas' => $kelas,
-            'hari' => $hari,
-            'nip' => $nip,
-            'jam_mulai' => $jam_mulai,
-            'jam_selesai' => $jam_selesai,
-            'koderuang' => $kode_ruang,
-            'tahun_ajaran' => $tahun_ajaran,
-            'jumlah_peserta' => $jumlah_peserta 
-        );
-        $this->db->where('kode_kelas', $old_kodekelas)->update('jadwal_kuliah', $data);
+        $this->db->where('kode_kelas', $kode_kelas)->update('detail_nilai', $data);
     }
 }
 ?>

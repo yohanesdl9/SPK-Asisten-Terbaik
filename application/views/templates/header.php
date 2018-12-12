@@ -70,7 +70,7 @@
           <a href="<?php echo base_url() ?>isi_nilai"><i class="fa fa-th"></i><span>Isi Nilai</span></span></a>
         </li>
         <li <?php echo $this->uri->segment(1) == 'perhitungan' ? 'class="active"' : '' ?>>
-          <a href="<?php echo base_url() ?>isi_nilai"><i class="fa fa-calculator"></i><span>Perhitungan</span></span></a>
+          <a href="<?php echo base_url() ?>perhitungan"><i class="fa fa-calculator"></i><span>Perhitungan</span></span></a>
         </li>
         <li class="treeview">
           <a href="#"><i class="fa fa-book"></i><span>Akademik</span>
