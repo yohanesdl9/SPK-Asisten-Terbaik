@@ -5,6 +5,7 @@ class Perhitungan extends CI_Controller {
     public function __construct(){
         parent::__construct();
         $this->load->library('ahp');
+        $this->load->model('mod_perhitungan');
     }
 
     public function index(){
@@ -25,8 +26,9 @@ class Perhitungan extends CI_Controller {
             array((1/$pair_1_4), (1/$pair_2_4), (1/$pair_3_4), 1),
         );
         $result = $this->ahp->process($pairwise_matrix);
-        $alternatives = $this->db->get('view_alternatives')->result();
-        $this->load->view('perhitungan/view_alt_bobot', compact('result', 'alternatives'));
+        $this->mod_perhitungan->insertKriteria($result['bobot']);
+        $alt = $this->mod_perhitungan->hitungSolusiIdeal();
+        $this->load->view('perhitungan/view_alt_bobot', compact('result', 'alt'));
     }
 }
 

@@ -23,23 +23,24 @@ if ($this->session->flashdata('error_message')){ ?>
         <table class="table table-bordered table-striped">
             <thead>
 				<tr>
+					<th class="text-center">Ranking</th>
 					<th class="text-center">Asisten</th>
-					<th class="text-center">C1</th>
-					<th class="text-center">C2</th>
-					<th class="text-center">C3</th>
-					<th class="text-center">C4</th>
+					<th class="text-center">Solusi Ideal Positif</th>
+					<th class="text-center">Solusi Ideal Negatif</th>
+					<th class="text-center">Nilai Preferensi</th>
 				</tr>
 			</thead>
 			<tbody>
-				<?php foreach($alternatives as $jd){?>
+				<?php $i = 1;
+				foreach($alt as $jd){ ?>
 				<tr>
-					<td><?php echo $jd->nama?></td>
-					<td class="text-center"><?php echo $jd->nilai_disiplin; ?></td>
-					<td class="text-center"><?php echo number_format($jd->avg_lulus, 1); ?></td>
-					<td class="text-center"><?php echo number_format($jd->avg_kelas, 1); ?></td>
-					<td class="text-center"><?php echo number_format($jd->avg_nilai_A, 1); ?></td>
+					<td class="text-center"><?php echo $i?></td>
+					<td><?php echo $jd['nama']?></td>
+					<td class="text-center"><?php echo number_format($jd['SIP'], 5); ?></td>
+					<td class="text-center"><?php echo number_format($jd['SIN'], 5); ?></td>
+					<td class="text-center"><?php echo number_format($jd['nilai_pref'], 5); ?></td>
 				</tr>
-				<?php } ?>
+				<?php $i++; } ?>
 			</tbody>
 		</table>
     </div>

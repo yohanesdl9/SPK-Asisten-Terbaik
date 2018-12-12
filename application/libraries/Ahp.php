@@ -10,12 +10,6 @@ class Ahp{
                 $pairwise_matrix[$i][$j] /= $sum_cols[$j];
             }
         }
-        // for ($i = 0; $i < count($pairwise_matrix); $i++){
-        //     for ($j = 0; $j < count($pairwise_matrix[0]); $j++){
-        //         echo number_format($pairwise_matrix[$i][$j], 3) . '  ';
-        //     }
-        //     echo '<br/>';
-        // }
         $eigen_vectnor = array(0, 0, 0, 0);
         for ($i = 0; $i < count($pairwise_matrix); $i++){
             for ($j = 0; $j < count($pairwise_matrix[0]); $j++){
