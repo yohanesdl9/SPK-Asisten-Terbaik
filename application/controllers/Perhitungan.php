@@ -9,7 +9,7 @@ class Perhitungan extends CI_Controller {
     }
 
     public function index(){
-        if ($this->session->userdata('isLogin' == TRUE)){
+        if ($this->session->userdata('isLogin') == TRUE){
             $this->load->view('perhitungan/input_matriks');
         } else {
             $result = $this->db->get('bobot_kriteria')->row();
