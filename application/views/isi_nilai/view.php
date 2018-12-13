@@ -19,7 +19,9 @@ if ($this->session->flashdata('success_message')){ ?>
 					<th rowspan="2" class="text-center">Pertemuan</th>
                     <th rowspan="2" class="text-center" style="width: 60px">Rata-Rata Kelas</th>
                     <th colspan="7" class="text-center">Jumlah Mahasiswa dengan Nilai</th>
+					<?php if ($this->session->userdata('isLogin') == TRUE){ ?>
                     <th rowspan="2" class="text-center">Opsi</th>
+					<?php } ?>
                 </tr>
                 <tr>
                     <th class="text-center" style="width: 40px">A</th>
@@ -45,9 +47,11 @@ if ($this->session->flashdata('success_message')){ ?>
                     <td class="text-center"><?php echo $jd->jumlah_C; ?></td>
                     <td class="text-center"><?php echo $jd->jumlah_D; ?></td>
                     <td class="text-center"><?php echo $jd->jumlah_E; ?></td>
+					<?php if ($this->session->userdata('isLogin') == TRUE){ ?>
 					<td>
 						<a href="<?php echo base_url() ?>isi_nilai/form_insert/<?php echo $jd->kode_kelas;?>" class="btn btn-xs btn-info">Masukkan</a>
 					</td>
+					<?php } ?>
 				</tr>
 				<?php } ?>
 			</tbody>
