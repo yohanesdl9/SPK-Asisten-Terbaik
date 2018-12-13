@@ -10,6 +10,7 @@ if ($this->session->flashdata('success_message')){ ?>
 }
 ?>
 <div class="box">
+	<?php if ($this->session->userdata('isLogin') == TRUE){ ?>
 	<div class="box-header with-border">
 		<div class="row">
 			<div class="col-md-2">
@@ -17,6 +18,7 @@ if ($this->session->flashdata('success_message')){ ?>
 			</div>
 		</div>
 	</div>
+	<?php } ?>
 	<div class="box-footer">
 		<table class="table table-bordered table-striped mytable">
 			<thead>
@@ -25,7 +27,9 @@ if ($this->session->flashdata('success_message')){ ?>
 					<th>Nama Matakuliah</th>
 					<th>Jenis Matakuliah</th>
 					<th>SKS</th>
+					<?php if ($this->session->userdata('isLogin') == TRUE){ ?>
 					<th>Opsi</th>
+					<?php } ?>
 				</tr>
 			</thead>				
 			<tbody>						
@@ -35,10 +39,12 @@ if ($this->session->flashdata('success_message')){ ?>
 					<td><?php echo $mk->namamk?></td>
 					<td><?php echo $mk->tipe == 1 ? 'Reguler' : 'Praktikum' ?></td>
 					<td><?php echo $mk->sks?></td>
+					<?php if ($this->session->userdata('isLogin') == TRUE){ ?>
 					<td class="btn-group">								
 						<a href="#" class="open_modal btn btn-xs btn-info" id="<?php echo $mk->kodemk;?>">Edit</a>
 						<a href="#" class="delete_modal btn btn-xs btn-danger" data-id="<?php echo $mk->kodemk; ?>" onclick="confirm_modal('<?php echo $mk->kodemk; ?>')">Hapus</a>
 					</td>
+					<?php } ?>
 				</tr>
 				<?php endforeach;?>
 			</tbody>

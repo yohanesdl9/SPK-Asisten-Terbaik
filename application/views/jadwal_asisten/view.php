@@ -10,6 +10,7 @@ if ($this->session->flashdata('success_message')){ ?>
 }
 ?>
 <div class="box">
+	<?php if ($this->session->userdata('isLogin') == TRUE){ ?>
 	<div class="box-header with-border">
 		<div class="row">
 			<div class="col-md-2">
@@ -17,6 +18,7 @@ if ($this->session->flashdata('success_message')){ ?>
 			</div>
 		</div>
 	</div>
+	<?php } ?>
 	<div class="box-footer">
 		<table class="table table-bordered table-striped mytable">
             <thead>
@@ -26,7 +28,9 @@ if ($this->session->flashdata('success_message')){ ?>
 					<th class="text-center">Pertemuan</th>
 					<th class="text-center">Asisten 1</th>
 					<th class="text-center">Asisten 2</th>
+					<?php if ($this->session->userdata('isLogin') == TRUE){ ?>
 					<th class="text-center">Opsi</th>
+					<?php } ?>
 				</tr>
 			</thead>
 			<tbody>
@@ -37,9 +41,11 @@ if ($this->session->flashdata('success_message')){ ?>
 					<td><?php echo get_nama_hari($jd->hari) . ' ' . $jd->jam_mulai . " - " . $jd->jam_selesai . ' ' . $jd->koderuang?></td>
 					<td><?php echo $jd->asisten_1?></td>
 					<td><?php echo $jd->asisten_2?></td>
+					<?php if ($this->session->userdata('isLogin') == TRUE){ ?>
 					<td class="btn-group">
 						<a href="<?php echo base_url()?>jadwal_asisten/form_edit/<?php echo $jd->kode_kelas ?>" class="btn btn-xs btn-info">Ubah</a>
 					</td>
+					<?php } ?>
 				</tr>
 				<?php } ?>
 			</tbody>

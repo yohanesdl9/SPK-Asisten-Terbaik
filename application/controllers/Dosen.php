@@ -4,17 +4,12 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 class Dosen extends CI_Controller {
     public function __construct(){
         parent::__construct();
-        $this->load->library('template');
         $this->load->model('mod_dosen');
     }
 
     public function index(){
-        if ($this->session->userdata('isLogin') == TRUE){
-            $data['dosen'] = $this->mod_dosen->fetchAll();
-            $this->load->view('dosen/view', $data);
-        } else {
-            redirect('login');
-        }
+        $data['dosen'] = $this->mod_dosen->fetchAll();
+        $this->load->view('dosen/view', $data);
     }
 
     public function insert(){

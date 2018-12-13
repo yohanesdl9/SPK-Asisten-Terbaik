@@ -10,17 +10,13 @@ class Jadwal_kuliah extends CI_Controller {
     }
 
     public function index(){
-        if ($this->session->userdata('isLogin') == TRUE){
-            $bulan = date('m');
-            $tahun = date('Y');
-            $tahun_ajaran = $bulan <= 7 ? ($tahun - 1) . "/" . $tahun : $tahun . "/" . ($tahun + 1);
-            $semester = ($bulan >= 2 && $bulan <= 7) ? 'Genap' : 'Ganjil';
-            $data['jadwal'] = $this->mod_jadkul->fetchAll();
-            $data['subtitle'] = "Semester " . $semester . " " . $tahun_ajaran;
-            $this->load->view('jadwal_kuliah/view', $data);
-        } else {
-            redirect('login');
-        }
+        $bulan = date('m');
+        $tahun = date('Y');
+        $tahun_ajaran = $bulan <= 7 ? ($tahun - 1) . "/" . $tahun : $tahun . "/" . ($tahun + 1);
+        $semester = ($bulan >= 2 && $bulan <= 7) ? 'Genap' : 'Ganjil';
+        $data['jadwal'] = $this->mod_jadkul->fetchAll();
+        $data['subtitle'] = "Semester " . $semester . " " . $tahun_ajaran;
+        $this->load->view('jadwal_kuliah/view', $data);
     }
 
     public function form_insert(){

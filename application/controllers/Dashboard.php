@@ -7,11 +7,7 @@ class Dashboard extends CI_Controller {
     }
 
     public function index(){
-        if ($this->session->userdata('isLogin') == TRUE){
-            $this->load->view('dashboard');
-        } else {
-            redirect('login');
-        }
+        $this->load->view('dashboard');
     }
 }
 

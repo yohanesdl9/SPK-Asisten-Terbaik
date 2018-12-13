@@ -4,17 +4,12 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 class Ruang extends CI_Controller {
     public function __construct(){
         parent::__construct();
-        $this->load->library('template');
         $this->load->model('mod_ruang');
     }
 
     public function index(){
-        if ($this->session->userdata('isLogin') == TRUE){
-            $data['ruang'] = $this->mod_ruang->fetchAll();
-            $this->load->view('ruang/view', $data);
-        } else {
-            redirect('login');
-        }
+        $data['ruang'] = $this->mod_ruang->fetchAll();
+        $this->load->view('ruang/view', $data);
     }
 
     public function insert(){

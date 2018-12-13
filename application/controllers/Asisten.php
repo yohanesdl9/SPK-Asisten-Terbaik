@@ -4,17 +4,12 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 class Asisten extends CI_Controller {
     public function __construct(){
         parent::__construct();
-        $this->load->library('template');
         $this->load->model('mod_asisten');
     }
 
     public function index(){
-        if ($this->session->userdata('isLogin') == TRUE){
-            $data['asdos'] = $this->mod_asisten->fetchAll();
-            $this->load->view('asisten/view', $data);
-        } else {
-            redirect('login');
-        }
+        $data['asdos'] = $this->mod_asisten->fetchAll();
+        $this->load->view('asisten/view', $data);
     }
 
     public function insert(){

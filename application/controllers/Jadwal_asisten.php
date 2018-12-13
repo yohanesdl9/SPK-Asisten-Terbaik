@@ -9,20 +9,16 @@ class Jadwal_asisten extends CI_Controller {
     }
 
     public function index(){
-        if ($this->session->userdata('isLogin') == TRUE){
-            $bulan = date('m');
-            $tahun = date('Y');
-            $tahun_ajaran = $bulan <= 7 ? ($tahun - 1) . "/" . $tahun : $tahun . "/" . ($tahun + 1);
-            $semester = ($bulan >= 2 && $bulan <= 7) ? 'Genap' : 'Ganjil';
-            $data['jadwal'] = $this->mod_jadast->fetchAll();
-            $data['matkul'] = $this->mod_jadast->fetchAllTanpaAsisten()->result();
-            $data['filled'] = $this->mod_jadast->fetchAllTanpaAsisten()->num_rows();
-            $data['subtitle'] = "Semester " . $semester . " " . $tahun_ajaran;
-            $data['asisten'] = $this->db->get('asisten_dosen')->result();
-            $this->load->view('jadwal_asisten/view', $data);
-        } else {
-            redirect('login');
-        }
+		$bulan = date('m');
+		$tahun = date('Y');
+		$tahun_ajaran = $bulan <= 7 ? ($tahun - 1) . "/" . $tahun : $tahun . "/" . ($tahun + 1);
+		$semester = ($bulan >= 2 && $bulan <= 7) ? 'Genap' : 'Ganjil';
+		$data['jadwal'] = $this->mod_jadast->fetchAll();
+		$data['matkul'] = $this->mod_jadast->fetchAllTanpaAsisten()->result();
+		$data['filled'] = $this->mod_jadast->fetchAllTanpaAsisten()->num_rows();
+		$data['subtitle'] = "Semester " . $semester . " " . $tahun_ajaran;
+		$data['asisten'] = $this->db->get('asisten_dosen')->result();
+		$this->load->view('jadwal_asisten/view', $data);
     }
 
     public function form_insert(){

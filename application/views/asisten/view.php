@@ -10,6 +10,7 @@ if ($this->session->flashdata('success_message')){ ?>
 }
 ?>
 <div class="box">
+    <?php if ($this->session->userdata('isLogin') == TRUE){ ?>
     <div class="box-header with-border">
         <div class="row">
             <div class="col-md-2">
@@ -20,6 +21,7 @@ if ($this->session->flashdata('success_message')){ ?>
             </div>
         </div>
     </div>
+    <?php } ?>
     <div class="box-body">
         <table class="table table-bordered table-striped table-hover mytable">
             <thead>
@@ -30,7 +32,9 @@ if ($this->session->flashdata('success_message')){ ?>
                     <th class="text-center">Alamat</th>
                     <th class="text-center">Telepon</th>
                     <th class="text-center">Nilai Kedisiplinan</th>
+                    <?php if ($this->session->userdata('isLogin') == TRUE){ ?>
                     <th class="text-center">Opsi</th>
+                    <?php } ?>
                 </tr>
             </thead>			
             <tbody>						
@@ -42,10 +46,12 @@ if ($this->session->flashdata('success_message')){ ?>
                     <td><?php echo $asd->alamat;?></td>
                     <td class="text-center"><?php echo $asd->telepon;?></td>
                     <td class="text-center"><?php echo $asd->nilai_disiplin;?></td>
+                    <?php if ($this->session->userdata('isLogin') == TRUE){ ?>
                     <td class="btn-group">								
                         <a href="#" class="open_modal btn btn-xs btn-info" id="<?php echo $asd->nrp;?>">Ubah</a>
                         <a href="#" class="delete_modal btn btn-xs btn-danger" data-id="<?php echo $asd->nrp; ?>" onclick="confirm_modal('<?php echo $asd->nrp ?>')">Hapus</a>
                     </td>
+                    <?php } ?>
                 </tr>
                 <?php }?>
             </tbody>

@@ -34,6 +34,7 @@
       <a href="#" class="sidebar-toggle" data-toggle="push-menu" role="button">
         <span class="sr-only">Toggle navigation</span>
       </a>
+      <?php if ($this->session->userdata('isLogin') == TRUE){ ?>
       <div class="navbar-custom-menu">
         <ul class="nav navbar-nav">
           <li class="dropdown user user-menu">
@@ -58,6 +59,7 @@
           </li>
         </ul>
       </div>
+      <?php } ?>
     </nav>
   </header>
   <aside class="main-sidebar">

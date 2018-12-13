@@ -45,6 +45,31 @@ INSERT INTO `asisten_dosen` VALUES ('141111003','Yoppy Pangestu','L','Jl. Ki Age
 UNLOCK TABLES;
 
 --
+-- Table structure for table `bobot_kriteria`
+--
+
+DROP TABLE IF EXISTS `bobot_kriteria`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `bobot_kriteria` (
+  `bobot_disiplin` double DEFAULT NULL,
+  `bobot_avg_lulus` double DEFAULT NULL,
+  `bobot_avg_kelas` double DEFAULT NULL,
+  `bobot_avg_nilai_A` double DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `bobot_kriteria`
+--
+
+LOCK TABLES `bobot_kriteria` WRITE;
+/*!40000 ALTER TABLE `bobot_kriteria` DISABLE KEYS */;
+INSERT INTO `bobot_kriteria` VALUES (0.55789247517189,0.26334511077158,0.12187261268144,0.056889801375095);
+/*!40000 ALTER TABLE `bobot_kriteria` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
 -- Table structure for table `detail_nilai`
 --
 
@@ -72,6 +97,7 @@ CREATE TABLE `detail_nilai` (
 
 LOCK TABLES `detail_nilai` WRITE;
 /*!40000 ALTER TABLE `detail_nilai` DISABLE KEYS */;
+INSERT INTO `detail_nilai` VALUES ('TI14KB32-A-2018',83.2,20,0,1,1,0,0,2),('TI14KB34-B-2018',84,17,1,2,2,1,0,1),('MI14KB36-A-2018',79.9,10,1,2,1,2,0,0),('TI14KB34-C-2018',83.5,17,2,1,2,1,0,0),('SI15KB35-A-2018',81.29,9,4,4,2,0,0,0),('TI14KB34-A-2018',84.8,18,3,2,0,0,0,2),('TI14KB34-D-2018',81.48,17,2,1,2,1,0,2),('TI14KB34-E-2018',79.34,14,2,5,1,2,0,0),('SI15KB54-A-2018',78.65,9,3,2,4,1,0,0),('SI15KB32-A-2018',81.15,10,3,3,2,1,0,0),('MI14KB35-A-2018',79.12,12,1,1,0,2,0,0),('TI14KB32-B-2018',82.76,18,3,2,1,0,0,0),('TI14KB32-C-2018',84.19,7,0,1,2,1,1,0),('TI14KB32-D-2018',80.34,12,2,2,1,3,0,0),('TI14KB32-E-2018',85.12,17,2,2,2,0,0,2);
 /*!40000 ALTER TABLE `detail_nilai` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -113,13 +139,13 @@ DROP TABLE IF EXISTS `jadwal_asisten`;
 CREATE TABLE `jadwal_asisten` (
   `kode_kelas` varchar(20) NOT NULL,
   `nrp_1` varchar(9) NOT NULL,
-  `nrp_2` varchar(9) NOT NULL,
+  `nrp_2` varchar(9) DEFAULT NULL,
   KEY `fk_kelas` (`kode_kelas`),
   KEY `fk_nrp` (`nrp_1`),
   KEY `fk_nrp_2` (`nrp_2`),
   CONSTRAINT `fk_kelas` FOREIGN KEY (`kode_kelas`) REFERENCES `jadwal_kuliah` (`kode_kelas`) ON DELETE CASCADE ON UPDATE CASCADE,
   CONSTRAINT `fk_nrp` FOREIGN KEY (`nrp_1`) REFERENCES `asisten_dosen` (`nrp`) ON DELETE CASCADE ON UPDATE CASCADE,
-  CONSTRAINT `fk_nrp_2` FOREIGN KEY (`nrp_2`) REFERENCES `asisten_dosen` (`nrp`) ON DELETE CASCADE ON UPDATE CASCADE
+  CONSTRAINT `fk_nrp_2` FOREIGN KEY (`nrp_2`) REFERENCES `asisten_dosen` (`nrp`) ON DELETE NO ACTION ON UPDATE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -129,7 +155,7 @@ CREATE TABLE `jadwal_asisten` (
 
 LOCK TABLES `jadwal_asisten` WRITE;
 /*!40000 ALTER TABLE `jadwal_asisten` DISABLE KEYS */;
-INSERT INTO `jadwal_asisten` VALUES ('TI14KB34-C-2018','151111011','161111051');
+INSERT INTO `jadwal_asisten` VALUES ('TI14KB34-C-2018','151111011','161111051'),('MI14KB33-A-2018','151111081',NULL),('MI14KB36-A-2018','151111011','161111025'),('SI15KB34-A-2018','151131002',NULL),('SI15KB35-A-2018','151111081','161111025'),('TI14KB34-D-2018','151111014','161111025'),('TI14KB33-A-2018','151111081',NULL),('TI14KB32-E-2018','151111098','161111030'),('SI15KB32-A-2018','151111081','161111076'),('TI14KB32-A-2018','151111011','161111033'),('TI14KB34-A-2018','151111011','161111044'),('TI14KB34-B-2018','151111011','161111044'),('TI14KB34-E-2018','151111081','161221007'),('SI15KB54-A-2018','151111081','151131014'),('TI14KB71-A-2018','141111003',NULL),('TI14KB51-A-2018','141111068',NULL),('TI14KB51-D-2018','151111073',NULL),('TI14KB51-B-2018','141111068',NULL),('TI14KB33-C-2018','161111070',NULL),('TI14KB33-B-2018','151111014',NULL),('TI14KB51-C-2018','141111068',NULL),('TI14KB32-B-2018','151111104','161111033'),('TI14KB32-C-2018','151111104','151131014'),('MI14KB35-A-2018','151111011','161111030'),('TI14KB32-D-2018','151111098','151111068'),('TI14KB33-D-2018','161221021',NULL),('TI14KB33-E-2018','151111014',NULL);
 /*!40000 ALTER TABLE `jadwal_asisten` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -224,6 +250,56 @@ INSERT INTO `ruang` VALUES ('B.2.2','Ruang B.2.2',28),('B.2.3','Ruang B.2.3',28)
 UNLOCK TABLES;
 
 --
+-- Temporary table structure for view `view_alternatives`
+--
+
+DROP TABLE IF EXISTS `view_alternatives`;
+/*!50001 DROP VIEW IF EXISTS `view_alternatives`*/;
+SET @saved_cs_client     = @@character_set_client;
+SET character_set_client = utf8;
+/*!50001 CREATE TABLE `view_alternatives` (
+  `nrp` tinyint NOT NULL,
+  `nama` tinyint NOT NULL,
+  `nilai_disiplin` tinyint NOT NULL,
+  `avg_kelas` tinyint NOT NULL,
+  `avg_lulus` tinyint NOT NULL,
+  `avg_nilai_A` tinyint NOT NULL
+) ENGINE=MyISAM */;
+SET character_set_client = @saved_cs_client;
+
+--
+-- Temporary table structure for view `view_detail_nilai`
+--
+
+DROP TABLE IF EXISTS `view_detail_nilai`;
+/*!50001 DROP VIEW IF EXISTS `view_detail_nilai`*/;
+SET @saved_cs_client     = @@character_set_client;
+SET character_set_client = utf8;
+/*!50001 CREATE TABLE `view_detail_nilai` (
+  `kode_kelas` tinyint NOT NULL,
+  `semester` tinyint NOT NULL,
+  `tahun_ajaran` tinyint NOT NULL,
+  `kodemk` tinyint NOT NULL,
+  `namamk` tinyint NOT NULL,
+  `kelas` tinyint NOT NULL,
+  `hari` tinyint NOT NULL,
+  `jam_mulai` tinyint NOT NULL,
+  `jam_selesai` tinyint NOT NULL,
+  `koderuang` tinyint NOT NULL,
+  `nama_dosen` tinyint NOT NULL,
+  `jumlah_peserta` tinyint NOT NULL,
+  `avg_kelas` tinyint NOT NULL,
+  `jumlah_A` tinyint NOT NULL,
+  `jumlah_B_plus` tinyint NOT NULL,
+  `jumlah_B` tinyint NOT NULL,
+  `jumlah_C_plus` tinyint NOT NULL,
+  `jumlah_C` tinyint NOT NULL,
+  `jumlah_D` tinyint NOT NULL,
+  `jumlah_E` tinyint NOT NULL
+) ENGINE=MyISAM */;
+SET character_set_client = @saved_cs_client;
+
+--
 -- Temporary table structure for view `view_jadwal_asisten`
 --
 
@@ -293,6 +369,84 @@ SET character_set_client = utf8;
 SET character_set_client = @saved_cs_client;
 
 --
+-- Temporary table structure for view `view_normalisasi_matriks`
+--
+
+DROP TABLE IF EXISTS `view_normalisasi_matriks`;
+/*!50001 DROP VIEW IF EXISTS `view_normalisasi_matriks`*/;
+SET @saved_cs_client     = @@character_set_client;
+SET character_set_client = utf8;
+/*!50001 CREATE TABLE `view_normalisasi_matriks` (
+  `nrp` tinyint NOT NULL,
+  `nama` tinyint NOT NULL,
+  `C1` tinyint NOT NULL,
+  `C2` tinyint NOT NULL,
+  `C3` tinyint NOT NULL,
+  `C4` tinyint NOT NULL
+) ENGINE=MyISAM */;
+SET character_set_client = @saved_cs_client;
+
+--
+-- Temporary table structure for view `view_solusi_ideal`
+--
+
+DROP TABLE IF EXISTS `view_solusi_ideal`;
+/*!50001 DROP VIEW IF EXISTS `view_solusi_ideal`*/;
+SET @saved_cs_client     = @@character_set_client;
+SET character_set_client = utf8;
+/*!50001 CREATE TABLE `view_solusi_ideal` (
+  `nrp` tinyint NOT NULL,
+  `nama` tinyint NOT NULL,
+  `C1_P` tinyint NOT NULL,
+  `C2_P` tinyint NOT NULL,
+  `C3_P` tinyint NOT NULL,
+  `C4_P` tinyint NOT NULL,
+  `C1_N` tinyint NOT NULL,
+  `C2_N` tinyint NOT NULL,
+  `C3_N` tinyint NOT NULL,
+  `C4_N` tinyint NOT NULL
+) ENGINE=MyISAM */;
+SET character_set_client = @saved_cs_client;
+
+--
+-- Final view structure for view `view_alternatives`
+--
+
+/*!50001 DROP TABLE IF EXISTS `view_alternatives`*/;
+/*!50001 DROP VIEW IF EXISTS `view_alternatives`*/;
+/*!50001 SET @saved_cs_client          = @@character_set_client */;
+/*!50001 SET @saved_cs_results         = @@character_set_results */;
+/*!50001 SET @saved_col_connection     = @@collation_connection */;
+/*!50001 SET character_set_client      = utf8mb4 */;
+/*!50001 SET character_set_results     = utf8mb4 */;
+/*!50001 SET collation_connection      = utf8mb4_general_ci */;
+/*!50001 CREATE ALGORITHM=UNDEFINED */
+/*!50013 DEFINER=`root`@`localhost` SQL SECURITY DEFINER */
+/*!50001 VIEW `view_alternatives` AS select `a`.`nrp` AS `nrp`,`a`.`nama` AS `nama`,`a`.`nilai_disiplin` AS `nilai_disiplin`,ifnull(avg(`dn`.`avg_kelas`),0) AS `avg_kelas`,ifnull(avg(((((((`dn`.`jumlah_A` + `dn`.`jumlah_B_plus`) + `dn`.`jumlah_B`) + `dn`.`jumlah_C_plus`) + `dn`.`jumlah_C`) / `jk`.`jumlah_peserta`) * 100)),0) AS `avg_lulus`,ifnull(avg(((`dn`.`jumlah_A` / `jk`.`jumlah_peserta`) * 100)),0) AS `avg_nilai_A` from ((((`asisten_dosen` `a` join `jadwal_asisten` `ja` on(((`ja`.`nrp_1` = `a`.`nrp`) or (`ja`.`nrp_2` = `a`.`nrp`)))) join `jadwal_kuliah` `jk` on((`ja`.`kode_kelas` = `jk`.`kode_kelas`))) join `matakuliah` `mk` on((`jk`.`kodemk` = `mk`.`kodemk`))) left join `detail_nilai` `dn` on((`dn`.`kode_kelas` = `jk`.`kode_kelas`))) where ((`mk`.`tipe` = 2) and (`a`.`jabatan` = 'Honorer')) group by `a`.`nrp`,`a`.`nama`,`a`.`nilai_disiplin` */;
+/*!50001 SET character_set_client      = @saved_cs_client */;
+/*!50001 SET character_set_results     = @saved_cs_results */;
+/*!50001 SET collation_connection      = @saved_col_connection */;
+
+--
+-- Final view structure for view `view_detail_nilai`
+--
+
+/*!50001 DROP TABLE IF EXISTS `view_detail_nilai`*/;
+/*!50001 DROP VIEW IF EXISTS `view_detail_nilai`*/;
+/*!50001 SET @saved_cs_client          = @@character_set_client */;
+/*!50001 SET @saved_cs_results         = @@character_set_results */;
+/*!50001 SET @saved_col_connection     = @@collation_connection */;
+/*!50001 SET character_set_client      = utf8mb4 */;
+/*!50001 SET character_set_results     = utf8mb4 */;
+/*!50001 SET collation_connection      = utf8mb4_general_ci */;
+/*!50001 CREATE ALGORITHM=UNDEFINED */
+/*!50013 DEFINER=`root`@`localhost` SQL SECURITY DEFINER */
+/*!50001 VIEW `view_detail_nilai` AS select `jk`.`kode_kelas` AS `kode_kelas`,`mk`.`semester` AS `semester`,`jk`.`tahun_ajaran` AS `tahun_ajaran`,`jk`.`kodemk` AS `kodemk`,`mk`.`namamk` AS `namamk`,`jk`.`kelas` AS `kelas`,`jk`.`hari` AS `hari`,`jk`.`jam_mulai` AS `jam_mulai`,`jk`.`jam_selesai` AS `jam_selesai`,`jk`.`koderuang` AS `koderuang`,`d`.`nama_dosen` AS `nama_dosen`,`jk`.`jumlah_peserta` AS `jumlah_peserta`,`n`.`avg_kelas` AS `avg_kelas`,`n`.`jumlah_A` AS `jumlah_A`,`n`.`jumlah_B_plus` AS `jumlah_B_plus`,`n`.`jumlah_B` AS `jumlah_B`,`n`.`jumlah_C_plus` AS `jumlah_C_plus`,`n`.`jumlah_C` AS `jumlah_C`,`n`.`jumlah_D` AS `jumlah_D`,`n`.`jumlah_E` AS `jumlah_E` from (((`jadwal_kuliah` `jk` join `matakuliah` `mk` on((`jk`.`kodemk` = `mk`.`kodemk`))) left join `detail_nilai` `n` on((`n`.`kode_kelas` = `jk`.`kode_kelas`))) join `dosen` `d` on((`jk`.`nip` = `d`.`nip`))) where (`mk`.`tipe` = 2) */;
+/*!50001 SET character_set_client      = @saved_cs_client */;
+/*!50001 SET character_set_results     = @saved_cs_results */;
+/*!50001 SET collation_connection      = @saved_col_connection */;
+
+--
 -- Final view structure for view `view_jadwal_asisten`
 --
 
@@ -306,7 +460,7 @@ SET character_set_client = @saved_cs_client;
 /*!50001 SET collation_connection      = utf8mb4_general_ci */;
 /*!50001 CREATE ALGORITHM=UNDEFINED */
 /*!50013 DEFINER=`root`@`localhost` SQL SECURITY DEFINER */
-/*!50001 VIEW `view_jadwal_asisten` AS select `v`.`kode_kelas` AS `kode_kelas`,`v`.`kodemk` AS `kodemk`,`v`.`namamk` AS `namamk`,`v`.`kelas` AS `kelas`,`v`.`nama_dosen` AS `nama_dosen`,`v`.`hari` AS `hari`,`v`.`jam_mulai` AS `jam_mulai`,`v`.`jam_selesai` AS `jam_selesai`,`v`.`koderuang` AS `koderuang`,`v`.`tahun_ajaran` AS `tahun_ajaran`,`v`.`semester` AS `semester`,`a1`.`nama` AS `asisten_1`,`a2`.`nama` AS `asisten_2` from (((`view_jadwal_kuliah` `v` join `jadwal_asisten` `ja` on((`ja`.`kode_kelas` = `v`.`kode_kelas`))) join `asisten_dosen` `a1` on((`ja`.`nrp_1` = `a1`.`nrp`))) join `asisten_dosen` `a2` on((`ja`.`nrp_2` = `a2`.`nrp`))) */;
+/*!50001 VIEW `view_jadwal_asisten` AS select `v`.`kode_kelas` AS `kode_kelas`,`v`.`kodemk` AS `kodemk`,`v`.`namamk` AS `namamk`,`v`.`kelas` AS `kelas`,`v`.`nama_dosen` AS `nama_dosen`,`v`.`hari` AS `hari`,`v`.`jam_mulai` AS `jam_mulai`,`v`.`jam_selesai` AS `jam_selesai`,`v`.`koderuang` AS `koderuang`,`v`.`tahun_ajaran` AS `tahun_ajaran`,`v`.`semester` AS `semester`,`a1`.`nama` AS `asisten_1`,`a2`.`nama` AS `asisten_2` from (((`view_jadwal_kuliah` `v` join `jadwal_asisten` `ja` on((`ja`.`kode_kelas` = `v`.`kode_kelas`))) join `asisten_dosen` `a1` on((`ja`.`nrp_1` = `a1`.`nrp`))) left join `asisten_dosen` `a2` on((`ja`.`nrp_2` = `a2`.`nrp`))) */;
 /*!50001 SET character_set_client      = @saved_cs_client */;
 /*!50001 SET character_set_results     = @saved_cs_results */;
 /*!50001 SET collation_connection      = @saved_col_connection */;
@@ -348,6 +502,44 @@ SET character_set_client = @saved_cs_client;
 /*!50001 SET character_set_client      = @saved_cs_client */;
 /*!50001 SET character_set_results     = @saved_cs_results */;
 /*!50001 SET collation_connection      = @saved_col_connection */;
+
+--
+-- Final view structure for view `view_normalisasi_matriks`
+--
+
+/*!50001 DROP TABLE IF EXISTS `view_normalisasi_matriks`*/;
+/*!50001 DROP VIEW IF EXISTS `view_normalisasi_matriks`*/;
+/*!50001 SET @saved_cs_client          = @@character_set_client */;
+/*!50001 SET @saved_cs_results         = @@character_set_results */;
+/*!50001 SET @saved_col_connection     = @@collation_connection */;
+/*!50001 SET character_set_client      = utf8mb4 */;
+/*!50001 SET character_set_results     = utf8mb4 */;
+/*!50001 SET collation_connection      = utf8mb4_general_ci */;
+/*!50001 CREATE ALGORITHM=UNDEFINED */
+/*!50013 DEFINER=`root`@`localhost` SQL SECURITY DEFINER */
+/*!50001 VIEW `view_normalisasi_matriks` AS select `a`.`nrp` AS `nrp`,`a`.`nama` AS `nama`,((`a`.`nilai_disiplin` / (select sqrt(sum(pow(`a`.`nilai_disiplin`,2))) from `view_alternatives` `a`)) * `b`.`bobot_disiplin`) AS `C1`,((`a`.`avg_lulus` / (select sqrt(sum(pow(`a`.`avg_lulus`,2))) from `view_alternatives` `a`)) * `b`.`bobot_avg_lulus`) AS `C2`,((`a`.`avg_kelas` / (select sqrt(sum(pow(`a`.`avg_kelas`,2))) from `view_alternatives` `a`)) * `b`.`bobot_avg_kelas`) AS `C3`,((`a`.`avg_nilai_A` / (select sqrt(sum(pow(`a`.`avg_nilai_A`,2))) from `view_alternatives` `a`)) * `b`.`bobot_avg_nilai_A`) AS `C4` from (`view_alternatives` `a` join `bobot_kriteria` `b`) */;
+/*!50001 SET character_set_client      = @saved_cs_client */;
+/*!50001 SET character_set_results     = @saved_cs_results */;
+/*!50001 SET collation_connection      = @saved_col_connection */;
+
+--
+-- Final view structure for view `view_solusi_ideal`
+--
+
+/*!50001 DROP TABLE IF EXISTS `view_solusi_ideal`*/;
+/*!50001 DROP VIEW IF EXISTS `view_solusi_ideal`*/;
+/*!50001 SET @saved_cs_client          = @@character_set_client */;
+/*!50001 SET @saved_cs_results         = @@character_set_results */;
+/*!50001 SET @saved_col_connection     = @@collation_connection */;
+/*!50001 SET character_set_client      = utf8mb4 */;
+/*!50001 SET character_set_results     = utf8mb4 */;
+/*!50001 SET collation_connection      = utf8mb4_general_ci */;
+/*!50001 CREATE ALGORITHM=UNDEFINED */
+/*!50013 DEFINER=`root`@`localhost` SQL SECURITY DEFINER */
+/*!50001 VIEW `view_solusi_ideal` AS select `vnm`.`nrp` AS `nrp`,`vnm`.`nama` AS `nama`,pow(sqrt(abs((`vnm`.`C1` - (select max(`vnm`.`C1`) from `view_normalisasi_matriks` `vnm`)))),2) AS `C1_P`,pow(sqrt(abs((`vnm`.`C2` - (select max(`vnm`.`C2`) from `view_normalisasi_matriks` `vnm`)))),2) AS `C2_P`,pow(sqrt(abs((`vnm`.`C3` - (select max(`vnm`.`C3`) from `view_normalisasi_matriks` `vnm`)))),2) AS `C3_P`,pow(sqrt(abs((`vnm`.`C4` - (select max(`vnm`.`C4`) from `view_normalisasi_matriks` `vnm`)))),2) AS `C4_P`,pow(sqrt(abs((`vnm`.`C1` - (select min(`vnm`.`C1`) from `view_normalisasi_matriks` `vnm`)))),2) AS `C1_N`,pow(sqrt(abs((`vnm`.`C2` - (select min(`vnm`.`C2`) from `view_normalisasi_matriks` `vnm`)))),2) AS `C2_N`,pow(sqrt(abs((`vnm`.`C3` - (select min(`vnm`.`C3`) from `view_normalisasi_matriks` `vnm`)))),2) AS `C3_N`,pow(sqrt(abs((`vnm`.`C4` - (select min(`vnm`.`C4`) from `view_normalisasi_matriks` `vnm`)))),2) AS `C4_N` from `view_normalisasi_matriks` `vnm` */;
+/*!50001 SET character_set_client      = @saved_cs_client */;
+/*!50001 SET character_set_results     = @saved_cs_results */;
+/*!50001 SET collation_connection      = @saved_col_connection */;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
 
 /*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
@@ -358,4 +550,4 @@ SET character_set_client = @saved_cs_client;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2018-11-26 11:50:53
+-- Dump completed on 2018-12-13  9:15:31
