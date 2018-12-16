@@ -20,6 +20,8 @@ class Ahp{
             $eigen_vectnor[$i] /= 4;
         }
         return array(
+            'sum_cols' => $sum_cols,
+            'pairwise_matrix' => $pairwise_matrix,
             'CR' => $this->checkConsistency($sum_cols, $eigen_vectnor),
             'bobot' => $eigen_vectnor
         );
@@ -38,10 +40,10 @@ class Ahp{
         $sum_cols = array(0, 0, 0, 0);
         for ($i = 0; $i < count($pairwise_matrix); $i++){
             for ($j = 0; $j < count($pairwise_matrix[0]); $j++){
-                $sum_cols[$j] += $pairwise_matrix[$j][$i];
+                $sum_cols[$i] += $pairwise_matrix[$j][$i];
             }
         }
-        return array_reverse($sum_cols);
+        return $sum_cols;
     }
 }
 

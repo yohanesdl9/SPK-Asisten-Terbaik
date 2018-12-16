@@ -54,7 +54,6 @@ class Isi_nilai extends CI_Controller {
                         $this->mod_isinilai->update($kode_kelas, $avg_kelas, $jumlah_A, $jumlah_B_plus, $jumlah_B, $jumlah_C_plus, $jumlah_C, $jumlah_D, $jumlah_E);
                         break;
                 }
-                
                 $this->session->set_flashdata('success_message', 'Nilai berhasil tersimpan');
                 redirect('isi_nilai');
             }

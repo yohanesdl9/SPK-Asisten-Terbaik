@@ -29,9 +29,10 @@ class Perhitungan extends CI_Controller {
             array(1, $pair_1_2, $pair_1_3, $pair_1_4),
             array((1/$pair_1_2), 1, $pair_2_3, $pair_2_4),
             array((1/$pair_1_3), (1/$pair_2_3), 1, $pair_3_4),
-            array((1/$pair_1_4), (1/$pair_2_4), (1/$pair_3_4), 1),
+            array((1/$pair_1_4), (1/$pair_2_4), (1/$pair_3_4), 1)
         );
         $result = $this->ahp->process($pairwise_matrix);
+        $sum_cols = $result['sum_cols'];
         if ($result['CR'] > 0.1){
             $this->session->set_flashdata('error_message', 'Rasio pembobotan tidak konsisten. Ulangi menginputkan matriks perbandingan');
             redirect('perhitungan');
@@ -39,9 +40,8 @@ class Perhitungan extends CI_Controller {
             $this->mod_perhitungan->insertKriteria($result['bobot']);
             $result = $this->db->get('bobot_kriteria')->row();
             $alt = $this->mod_perhitungan->hitungSolusiIdeal();
-            $this->load->view('perhitungan/view_alt_bobot', compact('result', 'alt', 'pairwise_matrix'));
+            $this->load->view('perhitungan/view_alt_bobot', compact('result', 'alt', 'pairwise_matrix', 'sum_cols'));
         }
-        
     }
 }
 
