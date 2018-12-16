@@ -44,22 +44,19 @@ if ($this->session->flashdata('error_message')){ ?>
             </div>
         </div>
 	</div>
-    <?php 
-        $action = $status == 1 ? 'update' : 'insert';
-    ?>
-	<form class="form-horizontal" action="<?php echo base_url()?>isi_nilai/<?php echo $action; ?>" method="post">
-		<div class="box-body">
+    <form class="form-horizontal" action="<?php echo base_url()?>isi_nilai/insert/<?php echo $status ?>" method="post">
+        <div class="box-body">
             <input type="hidden" name="kode_kelas" value="<?php echo $hasil->kode_kelas; ?>">
             <input type="hidden" name="jumlah_peserta" value="<?php echo $hasil->jumlah_peserta; ?>">
             <div class="form-group">
-				<label for="avg_kelas" class="col-md-2 control-label">Rata-Rata Kelas</label>
-				<div class="col-md-1">
-					<input type="text" class="form-control" name="avg_kelas" value="<?php echo @$data_nilai->avg_kelas; ?>" />
-				</div>
-			</div>
+                <label for="avg_kelas" class="col-md-2 control-label">Rata-Rata Kelas</label>
+                <div class="col-md-1">
+                    <input type="text" class="form-control" name="avg_kelas" value="<?php echo @$data_nilai->avg_kelas; ?>" />
+                </div>
+            </div>
             <div class="form-group">
-				<label for="avg_kelas" class="col-md-2 control-label">Jumlah Mahasiswa Dengan Nilai</label>
-				<div class="col-md-6">
+                <label for="avg_kelas" class="col-md-2 control-label">Jumlah Mahasiswa Dengan Nilai</label>
+                <div class="col-md-6">
                     <table class="table table-bordered">
                         <tr>
                             <td style="width: 5%;" class="text-center">A</td>
@@ -97,13 +94,13 @@ if ($this->session->flashdata('error_message')){ ?>
                         </tr>
                     </table>
                 </div>
-			</div>
-		</div>
-		<div class="box-footer">
-			<a href="<?php echo base_url()?>isi_nilai" class="btn btn-default">Kembali</a>
-			<input type="submit" class="btn btn-info pull-right" value="Simpan" />
-		</div>
-	</form>
+            </div>
+        </div>
+        <div class="box-footer">
+            <a href="<?php echo base_url()?>isi_nilai" class="btn btn-default">Kembali</a>
+            <input type="submit" class="btn btn-info pull-right" value="Simpan" />
+        </div>
+    </form>
 </div>			
 <?php
 $this->load->view('templates/footer');

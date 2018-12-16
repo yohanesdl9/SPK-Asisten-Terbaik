@@ -27,7 +27,7 @@ class Isi_nilai extends CI_Controller {
         $this->load->view('isi_nilai/form', compact('data_nilai', 'hasil', 'asisten', 'status'));
     }
 
-    public function insert(){
+    public function insert($status){
         $kode_kelas = $this->input->post('kode_kelas');
         $avg_kelas = $this->input->post('avg_kelas');
         $jumlah_A = $this->input->post('jumlah_A') ? $this->input->post('jumlah_A') : 0;
@@ -46,34 +46,19 @@ class Isi_nilai extends CI_Controller {
                 $this->session->set_flashdata('error_message', 'Cek kembali jumlah peserta dengan nilai yang didapatkan dengan jumlah peserta keseluruhan');
                 redirect('isi_nilai/form_insert/' . $kode_kelas);
             } else {
-                $this->mod_isinilai->insert($kode_kelas, $avg_kelas, $jumlah_A, $jumlah_B_plus, $jumlah_B, $jumlah_C_plus, $jumlah_C, $jumlah_D, $jumlah_E);
+                switch($status){
+                    case 0:
+                        $this->mod_isinilai->insert($kode_kelas, $avg_kelas, $jumlah_A, $jumlah_B_plus, $jumlah_B, $jumlah_C_plus, $jumlah_C, $jumlah_D, $jumlah_E);
+                        break;
+                    case 1:
+                        $this->mod_isinilai->update($kode_kelas, $avg_kelas, $jumlah_A, $jumlah_B_plus, $jumlah_B, $jumlah_C_plus, $jumlah_C, $jumlah_D, $jumlah_E);
+                        break;
+                }
+                
                 $this->session->set_flashdata('success_message', 'Nilai berhasil tersimpan');
                 redirect('isi_nilai');
             }
         }
-    }
-
-    public function update(){
-        $kode_kelas = $this->input->post('kode_kelas');
-        $avg_kelas = $this->input->post('avg_kelas');
-        $jumlah_A = $this->input->post('jumlah_A') ? $this->input->post('jumlah_A') : 0;
-        $jumlah_B_plus = $this->input->post('jumlah_B_plus') ? $this->input->post('jumlah_B_plus') : 0;
-        $jumlah_B = $this->input->post('jumlah_B') ? $this->input->post('jumlah_B') : 0;
-        $jumlah_C_plus = $this->input->post('jumlah_C_plus') ? $this->input->post('jumlah_C_plus') : 0;
-        $jumlah_C = $this->input->post('jumlah_C') ? $this->input->post('jumlah_C') : 0;
-        $jumlah_D = $this->input->post('jumlah_D') ? $this->input->post('jumlah_D') : 0;
-        $jumlah_E = $this->input->post('jumlah_E') ? $this->input->post('jumlah_E') : 0;
-        $jumlah_peserta = $this->input->post('jumlah_peserta');
-        if(empty($avg_kelas)){
-            $this->session->set_flashdata('error_message', 'Harap masukkan data dengan benar');
-            redirect('isi_nilai/form_insert/' . $kode_kelas);
-        } else {
-            $this->mod_isinilai->update($kode_kelas, $avg_kelas, $jumlah_A, $jumlah_B_plus, $jumlah_B, $jumlah_C_plus, $jumlah_C, $jumlah_D, $jumlah_E);
-            $this->session->set_flashdata('success_message', 'Nilai berhasil tersimpan');
-            redirect('isi_nilai');
-        }
-        $this->session->set_flashdata('success_message', 'Nilai berhasil tersimpan');
-        redirect('isi_nilai');
     }
 }
 

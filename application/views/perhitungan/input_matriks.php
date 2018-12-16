@@ -16,50 +16,50 @@ if ($this->session->flashdata('error_message')){ ?>
             <div class="form-group">
 				<label for="avg_kelas">Lakukan penilaian perbandingan dari kriteria-kriteria berikut</label>
                 <div class="row">
-                    <div class="col-md-6">
+                    <div class="col-md-7">
                         <table class="table table-bordered">
                             <thead>
                                 <tr>
-                                    <th style="width: 5%;" class="text-center"></th>
-                                    <th style="width: 5%;" class="text-center">C1</th>
-                                    <th style="width= 5%;" class="text-center">C2</th>
-                                    <th style="width= 5%;" class="text-center">C3</th>
-                                    <th style="width= 5%;" class="text-center">C4</th>
+                                    <th class="text-center"></th>
+                                    <th class="text-center">C1</th>
+                                    <th class="text-center">C2</th>
+                                    <th class="text-center">C3</th>
+                                    <th class="text-center">C4</th>
                                 </tr>
                             </thead>
                             <tbody>
                                 <tr>
                                     <td class="text-center">C1</td>
-                                    <td class="text-center">1</td>
-                                    <td style="width: 5%;"><input type="number" class="form-control" name="C12" min="1" max="9" /></td>
-                                    <td style="width: 5%;"><input type="number" class="form-control" name="C13" min="1" max="9" /></td>
-                                    <td style="width: 5%;"><input type="number" class="form-control" name="C14" min="1" max="9" /></td>
+                                    <td><input type="text" class="form-control" value="1" readonly></td>
+                                    <td><?php selectAngka('C12'); ?></td>
+                                    <td><?php selectAngka('C13'); ?></td>
+                                    <td><?php selectAngka('C14'); ?></td>
                                 </tr>
                                 <tr>
                                     <td class="text-center">C2</td>
-                                    <td></td>
-                                    <td class="text-center">1</td>
-                                    <td><input type="number" class="form-control" name="C23" min="1" max="9" /></td>
-                                    <td><input type="number" class="form-control" name="C24" min="1" max="9" /></td>
+                                    <td><input type="text" class="form-control" value="0" readonly></td>
+                                    <td><input type="text" class="form-control" value="1" readonly></td>
+                                    <td><?php selectAngka('C23'); ?></td>
+                                    <td><?php selectAngka('C24'); ?></td>
                                 </tr>
                                 <tr>
                                     <td class="text-center">C3</td>
-                                    <td></td>
-                                    <td></td>
-                                    <td class="text-center">1</td>
-                                    <td><input type="number" class="form-control" name="C34" min="1" max="9" /></td>
+                                    <td><input type="text" class="form-control" value="0" readonly></td>
+                                    <td><input type="text" class="form-control" value="0" readonly></td>
+                                    <td><input type="text" class="form-control" value="1" readonly></td>
+                                    <td><?php selectAngka('C34'); ?></td>
                                 </tr>
                                 <tr>
                                     <td class="text-center">C4</td>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-                                    <td class="text-center">1</td>
+                                    <td><input type="text" class="form-control" value="0" readonly></td>
+                                    <td><input type="text" class="form-control" value="0" readonly></td>
+                                    <td><input type="text" class="form-control" value="0" readonly></td>
+                                    <td><input type="text" class="form-control" value="1" readonly></td>
                                 </tr>
                             </tbody>
                         </table>
                     </div>
-                    <div class="col-md-6"> 
+                    <div class="col-md-5"> 
                         <p>Keterangan kriteria : </p>
                         <ul>
                             <li>C1 : Kedisiplinan Asisten</li>
@@ -76,7 +76,15 @@ if ($this->session->flashdata('error_message')){ ?>
 			<input type="submit" class="btn btn-info pull-right" value="Simpan" />
 		</div>
 	</form>
-</div>			
+</div>		
 <?php
 $this->load->view('templates/footer');
+
+function selectAngka($name){ ?>
+    <select class="form-control" name="<?php echo $name ?>" id="<?php echo $name ?>">
+    <?php for ($i = 1; $i <= 9; $i++){ ?>
+        <option value="<?php echo $i ?>"><?php echo $i ?></option>
+    <?php } ?>
+    </select>
+<?php }
 ?>

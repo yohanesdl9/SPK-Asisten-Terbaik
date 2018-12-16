@@ -2,8 +2,6 @@
 defined('BASEPATH') OR exit('No direct script access allowed');
 
 class Login extends CI_Controller {
-    var $default_email = 'baa@stiki.ac.id';
-    var $default_password = 'baastikielang';
 
     public function __construct(){
         parent::__construct();
@@ -26,12 +24,13 @@ class Login extends CI_Controller {
         if ($remember_username == 'on'){
             $this->input->set_cookie('username', $email, 60000 * 240);
         }
-        if ($email == $default_email && $password == $default_password){
+        if ($email == 'baa@stiki.ac.id' && $password == 'baastikielang'){
             $session_data = ['isLogin' => TRUE];
             $this->session->set_userdata($session_data);
             redirect('dashboard');
         } else {
             $this->session->set_flashdata('login_error', 'Email atau password salah. Silahkan mencoba lagi');
+            redirect('login');
         }
     }
 }
