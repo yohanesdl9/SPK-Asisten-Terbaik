@@ -15,7 +15,7 @@ if ($this->session->flashdata('error_message')){ ?>
 		<div class="col-md-5">
 		<?php if ($this->session->userdata('isLogin') == TRUE){ ?>
 		<h4>Matriks Pairwise Comparison</h4>
-		<table class="table table-bordered table-striped">
+			<table class="table table-bordered table-striped">
 				<thead>
 					<tr>
 						<th style="width: 5%" class="text-center"></th>
