@@ -1,6 +1,6 @@
 # DSS Best STIKI Practicum Class Assistant
 
-Web-based decision support system program to determine the best STIKI practicum assistant using the TOPSIS method.
+Web-based decision support system program to determine the best STIKI practicum assistant using the AHP-TOPSIS method.
 Made by STIKI Malang students for final task of Decision Support System course in STIKI Malang.
 
 List of Author :
